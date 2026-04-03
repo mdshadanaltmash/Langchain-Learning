@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
+from langchain_openai import AzureOpenAI
 
 load_dotenv()
 
@@ -28,10 +28,12 @@ Musk was the largest donor in the 2024 U.S. presidential election, where he supp
         template=summary_template
     )
 
-    llm = ChatOpenAI(temperature=0, model="gpt-5")
+    # llm = AzureOpenAI(temperature=0, model="gpt-5")
+    llm = AzureOpenAI(model_name="gpt-3.5-turbo-instruct")
     chain = summary_prompt_template | llm
-    response = chain.invoke(input={"information": information})
-    print(response.content)
+    print(chain)
+    # response = chain.invoke(input={"information": information})
+    # print(response.content)
 
 
 if __name__ == "__main__":
